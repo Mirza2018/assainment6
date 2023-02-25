@@ -1,5 +1,7 @@
 document.getElementById('spiner-go').style.display = 'none'
+
 const Phonesearch = () => {
+    document.getElementById('spiner-go').style.display = 'block'
     const searchText = document.getElementById('search-text').value;
     const searchField = searchText.toLowerCase()
 
@@ -22,23 +24,28 @@ const Phonesearch = () => {
 
 }
 
+
 const phoneDisplay = (data) => {
     const divcontainer = document.getElementById('display-div');
     divcontainer.textContent = ''
     console.log(data);
 
     const phones = [];
+    
 
     if (data == '') {
         console.log('No result found');
         document.getElementById('no-result').style.display = "block";
+        document.getElementById('spiner-go').style.display = 'none';
     }
     else {
+        document.getElementById('no-result').style.display = "none";
+        document.getElementById('spiner-go').style.display = 'none';
 
         for (let i = 0; i < 20; i++) {
-            phones[i]=  data[i];
+            phones[i] = data[i];
         }
-        console.log("hers",phones);
+        console.log("hers", phones);
         phones.forEach(phone => {
             // console.log(phone);
             const div = document.createElement('div');
@@ -55,6 +62,7 @@ const phoneDisplay = (data) => {
 
         });
     }
+    
 }
 
 
@@ -84,6 +92,8 @@ const watchDetails = (phone) => {
    <P>Sensos: ${phone.mainFeatures.sensors}</p>  
    `
     divcontainer.appendChild(div);
-    document.getElementById('spiner-go').style.display = 'block'
+   
+   
 }
 
+ 
