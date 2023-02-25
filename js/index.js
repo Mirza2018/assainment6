@@ -1,5 +1,14 @@
+document.getElementById('spiner-go').style.display = 'none'
 const Phonesearch = () => {
-    const searchField = document.getElementById('search-text').value;
+    const searchText = document.getElementById('search-text').value;
+    const searchField = searchText.toLowerCase()
+
+    console.log(searchField);
+
+
+    const mainBox = document.getElementById('one-details');
+    mainBox.textContent = "";
+
     document.getElementById('search-text').value = '';
 
     // console.log(searchField);
@@ -13,15 +22,23 @@ const Phonesearch = () => {
 
 }
 
-const phoneDisplay = (phones) => {
+const phoneDisplay = (data) => {
     const divcontainer = document.getElementById('display-div');
     divcontainer.textContent = ''
-    console.log(phones);
-    if (phones == '') {
+    console.log(data);
+
+    const phones = [];
+
+    if (data == '') {
         console.log('No result found');
         document.getElementById('no-result').style.display = "block";
     }
     else {
+
+        for (let i = 0; i < 20; i++) {
+            phones[i]=  data[i];
+        }
+        console.log("hers",phones);
         phones.forEach(phone => {
             // console.log(phone);
             const div = document.createElement('div');
@@ -30,7 +47,7 @@ const phoneDisplay = (phones) => {
             <img src="${phone.image}" class="card-img-top" alt="...">
             <div class="card-body">
             <h5 class="card-title">${phone.phone_name}</h5>
-            <p class="card-text">${phone.brand}</p>
+            <p class="card-text">Brand: ${phone.brand}</p>
             <a href="#" onclick="phoneDetails ('${phone.slug}')" class="btn btn-primary text-center">Get Details</a>
             </div>     
         `
@@ -53,6 +70,7 @@ const phoneDetails = (data) => {
 const watchDetails = (phone) => {
     console.log(phone);
     const divcontainer = document.getElementById('one-details');
+    divcontainer.textContent = "";
     const div = document.createElement('div');
     div.classList.add('card')
     div.innerHTML = `
@@ -66,5 +84,6 @@ const watchDetails = (phone) => {
    <P>Sensos: ${phone.mainFeatures.sensors}</p>  
    `
     divcontainer.appendChild(div);
+    document.getElementById('spiner-go').style.display = 'block'
 }
 
